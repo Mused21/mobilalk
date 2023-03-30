@@ -7,12 +7,12 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/EditTextUserName"
+        android:id="@+id/EditTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="12"
-        android:hint="@string/username"
-        android:inputType="text"
+        android:hint="@string/email_cim"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.221"
@@ -27,7 +27,7 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/EditTextUserName"
+        app:layout_constraintTop_toBottomOf="@+id/EditTextEmail"
         app:layout_constraintVertical_bias="0.171"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/EditTexPassword"
-        app:layout_constraintVertical_bias="0.564" />
+        app:layout_constraintVertical_bias="0.142" />
 
     <Button
         android:id="@+id/registerButton"
@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.074" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

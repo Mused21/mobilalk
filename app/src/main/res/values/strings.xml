@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Yet Another Gym Tracker App</string>
+    <string name="app_name">Yet Another Gym Tracker</string>
     <string name="username">Felhasználónév</string>
     <string name="password">Jelszó</string>
     <string name="login">Bejelentkezés</string>
@@ -7,4 +7,10 @@
     <string name="email_cim">E-mail cím</string>
     <string name="password_again">Jelszó megerősítése</string>
     <string name="cancel">Mégse</string>
+    <string name="logout">Kijelentkezés</string>
+    <string name="myprofile">Profilom</string>
+    <string name="welcome_message">Üdv, %1$s!</string>
+    <string name="new_workout">Új edzés</string>
+    <string name="previous_workouts">Korábbi edzések</string>
+    <string name="new_set">Új szett</string>
 </resources>
