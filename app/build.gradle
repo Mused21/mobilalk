@@ -5,12 +5,13 @@ plugins {
 
 android {
     namespace 'hu.mobilalk.yagta'
-    compileSdk 33
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "hu.mobilalk.yagta"
         minSdk 24
-        targetSdk 33
+        compileSdkVersion 33
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
@@ -26,6 +27,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

@@ -4,15 +4,16 @@ TODO
 - Futtatási hiba nincs DONE
 - Firebase auth DONE
 - Regisztráció DONE
-- Adatmodell (class / interface) ?
+- Adatmodell (class / interface) DONE
 - 3 különböző activity DONE
-- Beviteli mezők típusa megfelelő ALWAYS
+- Beviteli mezők típusa megfelelő DONE
 - ConstraintLayout és egy másik Layout DONE
-- Reszponzív VÉGÉN
-- 2 animáció 
-- Intentek, navigáció activity-k között ALWAYS
-- LifeCycle Hook 
-- Androidos erőforrás, permission VÉGÉN
-- Notification/alarm manager/job scheduler VÉGÉN
-- CRUD műveletek, külön szálon
-- 2 komplex Firestore lekérdezés amely indexet igényel (where, rendezés, léptetés, limit)
+- Intentek, navigáció activity-k között DONE
+- LifeCycle Hook DONE
+- CRUD műveletek, külön szálon DONE
+- 2 komplex Firestore lekérdezés amely indexet igényel (where, rendezés, léptetés, limit) DONE
+- Notification/alarm manager/job scheduler DONE
+
+- Reszponzív TO DO
+- 2 animáció TO DO
+- Androidos erőforrás, permission TO DO

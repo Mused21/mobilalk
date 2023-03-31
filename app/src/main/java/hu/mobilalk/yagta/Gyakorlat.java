@@ -2,27 +2,19 @@ package hu.mobilalk.yagta;
 
 public class Gyakorlat {
 
-    private int szettIsmetles;
+    private int id;
     private String gyakorlatNev;
     private double suly;
-    private int gyakorlatIsmetles;
+    private int ismetles;
 
     public Gyakorlat() {
     }
 
-    public Gyakorlat(int szettIsmetles, String gyakorlatNev, double suly, int gyakorlatIsmetles) {
-        this.szettIsmetles = szettIsmetles;
+    public Gyakorlat(int id, String gyakorlatNev, double suly, int ismetles) {
+        this.id = id;
         this.gyakorlatNev = gyakorlatNev;
         this.suly = suly;
-        this.gyakorlatIsmetles = gyakorlatIsmetles;
-    }
-
-    public int getSzettIsmetles() {
-        return szettIsmetles;
-    }
-
-    public void setSzettIsmetles(int szettIsmetles) {
-        this.szettIsmetles = szettIsmetles;
+        this.ismetles = ismetles;
     }
 
     public String getGyakorlatNev() {
@@ -41,11 +33,19 @@ public class Gyakorlat {
         this.suly = suly;
     }
 
-    public int getGyakorlatIsmetles() {
-        return gyakorlatIsmetles;
+    public int getIsmetles() {
+        return ismetles;
     }
 
-    public void setGyakorlatIsmetles(int gyakorlatIsmetles) {
-        this.gyakorlatIsmetles = gyakorlatIsmetles;
+    public void setIsmetles(int ismetles) {
+        this.ismetles = ismetles;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -12,15 +12,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class NewWorkoutActivity extends AppCompatActivity {
@@ -29,10 +32,9 @@ public class NewWorkoutActivity extends AppCompatActivity {
     private static final String PREF_KEY = NewWorkoutActivity.class.getPackage().toString();
     private int counter = 1;
     private FirebaseUser user;
-
-    TextView dateTV;
-    LinearLayout linearLayout;
-
+    private TextView dateTV;
+    private LinearLayout linearLayout;
+    private FirebaseFirestore mFirestore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +51,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
         dateTV = findViewById(R.id.dateTextView);
         dateTV.setText(new SimpleDateFormat("yyyy.MM.dd.", Locale.getDefault()).format(new Date()));
         linearLayout = findViewById(R.id.linearLayout);
+        mFirestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -62,27 +65,33 @@ public class NewWorkoutActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.profile_button:
-                return true;
+                Intent intent = new Intent(this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
             case R.id.logout_button:
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(this, MainActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(logoutIntent);
                 return true;
+            case R.id.home_button:
+                Intent homeIntent = new Intent(this, GymMenuActivity.class);
+                startActivity(homeIntent);
+                finish();
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    public void newSet(View view) {
+    public void newExercise(View view) {
         LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View addView = layoutInflater.inflate(R.layout.szett, null);
-        TextView szettSzama = (TextView)addView.findViewById(R.id.szettSzama);
-        szettSzama.setTextSize(20);
-        szettSzama.setText(String.format("%d. szett", counter++));
+        final View addView = layoutInflater.inflate(R.layout.edzes, null);
+        TextView gyakorlatSzama = addView.findViewById(R.id.gyakorlatSzama);
+        gyakorlatSzama.setTextSize(20);
+        gyakorlatSzama.setText(String.format("%d.", counter++));
 
-
-        Button buttonRemove = (Button)addView.findViewById(R.id.remove);
+        Button buttonRemove = addView.findViewById(R.id.remove);
         buttonRemove.setOnClickListener(v -> {
             ((LinearLayout)addView.getParent()).removeView(addView);
             counter--;
@@ -93,10 +102,40 @@ public class NewWorkoutActivity extends AppCompatActivity {
     }
 
     private void reorderChildren() {
-        for (int i = 2; i <= counter; i++) {
+        for (int i = 3; i <= counter+1; i++) {
             View view = linearLayout.getChildAt(i);
-            TextView szettSzama = (TextView)view.findViewById(R.id.szettSzama);
-            szettSzama.setText(String.format("%d. szett", i-1));
+            TextView gyakorlatSzama = view.findViewById(R.id.gyakorlatSzama);
+            gyakorlatSzama.setText(String.format("%d.", i-2));
         }
+    }
+
+    public void saveWorkout(View view) {
+        if (linearLayout.getChildCount() <= 3) {
+            return;
+        }
+
+        CollectionReference mWorkouts = mFirestore.collection("Workouts");
+        List<Gyakorlat> gyakorlatok = new ArrayList<>();
+
+        for (int i = 3; i <= counter+1; i++) {
+            View currentView = linearLayout.getChildAt(i);
+
+            TextView ismetlesSzam = currentView.findViewById(R.id.ismetles);
+            TextView gyakorlatNeve = currentView.findViewById(R.id.gyakorlatNeve);
+            TextView suly = currentView.findViewById(R.id.suly);
+
+            Gyakorlat currentGyakorlat = new Gyakorlat(
+                    i-2,
+                    gyakorlatNeve.getText().toString(),
+                    Integer.parseInt(suly.getText().toString()),
+                    Integer.parseInt(ismetlesSzam.getText().toString())
+            );
+
+            gyakorlatok.add(currentGyakorlat);
+        }
+
+        Edzes edzes = new Edzes(user.getEmail(), new Date(), gyakorlatok);
+        mWorkouts.add(edzes);
+        finish();
     }
 }

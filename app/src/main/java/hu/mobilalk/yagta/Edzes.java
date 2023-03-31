@@ -7,15 +7,15 @@ public class Edzes {
 
     private String email;
     private Date date;
-    private List<Szett> szettek;
+    private List<Gyakorlat> gyakorlatok;
 
     public Edzes() {
     }
 
-    public Edzes(String email, Date date, List<Szett> szettek) {
+    public Edzes(String email, Date date, List<Gyakorlat> gyakorlatok) {
         this.email = email;
         this.date = date;
-        this.szettek = szettek;
+        this.gyakorlatok = gyakorlatok;
     }
 
     public String getEmail() {
@@ -34,11 +34,11 @@ public class Edzes {
         this.date = date;
     }
 
-    public List<Szett> getSzettek() {
-        return szettek;
+    public List<Gyakorlat> getGyakorlatok() {
+        return gyakorlatok;
     }
 
-    public void setSzettek(List<Szett> szettek) {
-        this.szettek = szettek;
+    public void setSzettek(List<Gyakorlat> gyakorlatok) {
+        this.gyakorlatok = gyakorlatok;
     }
 }
