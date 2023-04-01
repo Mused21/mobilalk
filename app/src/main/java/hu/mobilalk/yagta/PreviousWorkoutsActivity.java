@@ -95,6 +95,7 @@ public class PreviousWorkoutsActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
+                return true;
             case R.id.logout_button:
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(this, MainActivity.class);
@@ -105,6 +106,7 @@ public class PreviousWorkoutsActivity extends AppCompatActivity {
                 Intent homeIntent = new Intent(this, GymMenuActivity.class);
                 startActivity(homeIntent);
                 finish();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);

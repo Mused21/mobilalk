@@ -13,7 +13,7 @@ TODO
 - CRUD műveletek, külön szálon DONE
 - 2 komplex Firestore lekérdezés amely indexet igényel (where, rendezés, léptetés, limit) DONE
 - Notification/alarm manager/job scheduler DONE
+- Androidos erőforrás, permission DONE
 
 - Reszponzív TO DO
 - 2 animáció TO DO
-- Androidos erőforrás, permission TO DO

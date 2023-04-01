@@ -29,7 +29,6 @@ import java.util.Locale;
 public class NewWorkoutActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = NewWorkoutActivity.class.getName();
-    private static final String PREF_KEY = NewWorkoutActivity.class.getPackage().toString();
     private int counter = 1;
     private FirebaseUser user;
     private TextView dateTV;
@@ -68,6 +67,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
+                return true;
             case R.id.logout_button:
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(this, MainActivity.class);
@@ -78,6 +78,7 @@ public class NewWorkoutActivity extends AppCompatActivity {
                 Intent homeIntent = new Intent(this, GymMenuActivity.class);
                 startActivity(homeIntent);
                 finish();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -114,28 +115,51 @@ public class NewWorkoutActivity extends AppCompatActivity {
             return;
         }
 
+        boolean skipped = false;
+
         CollectionReference mWorkouts = mFirestore.collection("Workouts");
         List<Gyakorlat> gyakorlatok = new ArrayList<>();
 
         for (int i = 3; i <= counter+1; i++) {
             View currentView = linearLayout.getChildAt(i);
 
-            TextView ismetlesSzam = currentView.findViewById(R.id.ismetles);
-            TextView gyakorlatNeve = currentView.findViewById(R.id.gyakorlatNeve);
-            TextView suly = currentView.findViewById(R.id.suly);
+            TextView ismetlesSzamTV = currentView.findViewById(R.id.ismetles);
+            TextView gyakorlatNeveTV = currentView.findViewById(R.id.gyakorlatNeve);
+            TextView sulyTV = currentView.findViewById(R.id.suly);
+
+            double suly = 0.0;
+
+            if (gyakorlatNeveTV.getText().toString().isEmpty() || ismetlesSzamTV.getText().toString().isEmpty()) {
+                skipped = true;
+                continue;
+            }
+
+            if (!sulyTV.getText().toString().isEmpty()) {
+                suly = Double.parseDouble(sulyTV.getText().toString());
+            }
 
             Gyakorlat currentGyakorlat = new Gyakorlat(
                     i-2,
-                    gyakorlatNeve.getText().toString(),
-                    Integer.parseInt(suly.getText().toString()),
-                    Integer.parseInt(ismetlesSzam.getText().toString())
+                    gyakorlatNeveTV.getText().toString(),
+                    suly,
+                    Integer.parseInt(ismetlesSzamTV.getText().toString())
             );
 
             gyakorlatok.add(currentGyakorlat);
         }
 
-        Edzes edzes = new Edzes(user.getEmail(), new Date(), gyakorlatok);
-        mWorkouts.add(edzes);
-        finish();
+        if (!gyakorlatok.isEmpty()) {
+
+            if (skipped) {
+                int i = 1;
+                for (Gyakorlat gyakorlat : gyakorlatok) {
+                    gyakorlat.setId(i++);
+                }
+            }
+
+            Edzes edzes = new Edzes(user.getEmail(), new Date(), gyakorlatok);
+            mWorkouts.add(edzes);
+            finish();
+        }
     }
 }
