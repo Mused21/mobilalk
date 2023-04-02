@@ -4,16 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/EditTextUserName"
+        android:id="@+id/EditTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:ems="12"
-        android:hint="@string/username"
-        android:inputType="text" />
+        android:hint="@string/email_cim"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/EditTexPassword"
@@ -26,7 +27,7 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="login"
@@ -34,7 +35,7 @@
 
     <Button
         android:id="@+id/registerButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:onClick="register"
